@@ -1,1 +1,4 @@
 *.secrets.*
+lambda/package
+.DS_Store
+*.zip
