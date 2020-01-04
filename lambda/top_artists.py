@@ -21,7 +21,7 @@ table = dynamodb.Table('ApotifyApiKeys')
 def lambda_handler(event, context):
 
     if event['test']:
-        logger.info("TestEventRevcieved")
+        logger.info("TestEventReceived")
         return testResponse()
 
     # See if "expiresAt" indeed indicates we need a new token.
