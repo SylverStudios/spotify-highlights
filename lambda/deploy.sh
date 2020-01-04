@@ -7,6 +7,7 @@ cd package
 zip -r ../$FILE.zip .
 cd ..
 zip -g $FILE.zip top_artists.py
+zip -g $FILE.zip example_response.py
 
 echo "Zip ready:"
 echo $FILE.zip
