@@ -1,35 +1,37 @@
 # spotify-highlights
 
+Cloud Formation template using SAM to deploy Lambda & resources to return Spotify Top 5 Artists
 
-## TODO
+|Resource                   |Name                                           |
+|---------------------------|-----------------------------------------------|
+|AWS::ApiGateway::Deployment|ServerlessRestApiDeploymentd51448a06d          |
+|AWS::ApiGateway::Stage     |ServerlessRestApiProdStage                     |
+|AWS::ApiGateway::RestApi   |ServerlessRestApi                              |
+|AWS::IAM::Role             |SpotifyArtistsFunctionRole                     |
+|AWS::Lambda::Permission    |SpotifyArtistsFunctionTopArtistsPermissionProd |
+|AWS::Lambda::Function      |SpotifyArtistsFunction                         |
 
-`GET https://api.spotify.com/v1/me/top/artists`
 
-- [x] Request Top Artist Data from Spotify
-- [x] Store API Token securely somewhere
-- [ ] Build Refresh token info
-- [ ] (Discovery) May need to keep token in Dynamo so it can be shared across lambdas
-- [ ] Lambda returns something useful
 
 ## SAM Cli
 
 * `sam build`
-* `sam local invoke`
+* `sam local invoke "SpotifyArtistsFunction" -e events/event.json`
 * `sam deploy --guided --profile personal`
   * `--profile <name>` indicates which profile in the creds file to use
   * `--guided` only need to do that the first time and it will save the `samconfig.toml` file
 * Delete the cloud formation stack that was created
-  * `aws cloudformation delete-stack --stack-name hello-world-sample --region us-east-1
+  * `aws cloudformation delete-stack --stack-name hello-world-sample --region us-east-1 --profile personal
 
 
 After deploy there is a ton of output, but at the very end there will be aline that looks something like
 ```
 …
-HelloWorldApi - API Gateway endpoint URL for Prod stage for Hello World function … https://<IDHERE>.execute-api.us-east-1.amazonaws.com/Prod/hello/
+SpotifyArtistsApi - API Gateway endpoint URL for Prod stage for Spotify Artists function … https://<ID>.execute-api.us-east-1.amazonaws.com/Prod/hello/
 …
 ```
 
-You can `curl https://<IDHERE>.execute-api.us-east-1.amazonaws.com/Prod/hello/` and hit the lambda right away!!! GORSH, how easy!
+You can `curl https://<ID>.execute-api.us-east-1.amazonaws.com/Prod/hello/` and hit the lambda right away!!! GORSH, how easy!
 
 ### Resources
 

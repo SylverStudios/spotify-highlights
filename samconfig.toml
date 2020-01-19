@@ -2,9 +2,9 @@ version = 0.1
 [default]
 [default.deploy]
 [default.deploy.parameters]
-stack_name = "hello-world-sample"
+stack_name = "spotify-top-artists"
 s3_bucket = "aws-sam-cli-managed-default-samclisourcebucket-1nnspuzt6bi4f"
-s3_prefix = "hello-world-sample"
+s3_prefix = "spotify-top-artists"
 region = "us-east-1"
 profile = "personal"
 confirm_changeset = true
