@@ -1,7 +1,7 @@
 # spotify-highlights
 
 
-## Lambda
+## TODO
 
 `GET https://api.spotify.com/v1/me/top/artists`
 
@@ -11,7 +11,25 @@
 - [ ] (Discovery) May need to keep token in Dynamo so it can be shared across lambdas
 - [ ] Lambda returns something useful
 
+## SAM Cli
 
+* `sam build`
+* `sam local invoke`
+* `sam deploy --guided --profile personal`
+  * `--profile <name>` indicates which profile in the creds file to use
+  * `--guided` only need to do that the first time and it will save the `samconfig.toml` file
+* Delete the cloud formation stack that was created
+  * `aws cloudformation delete-stack --stack-name hello-world-sample --region us-east-1
+
+
+After deploy there is a ton of output, but at the very end there will be aline that looks something like
+```
+…
+HelloWorldApi - API Gateway endpoint URL for Prod stage for Hello World function … https://<IDHERE>.execute-api.us-east-1.amazonaws.com/Prod/hello/
+…
+```
+
+You can `curl https://<IDHERE>.execute-api.us-east-1.amazonaws.com/Prod/hello/` and hit the lambda right away!!! GORSH, how easy!
 
 ### Resources
 
