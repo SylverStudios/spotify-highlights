@@ -70,4 +70,9 @@ def refreshTheToken(refreshToken):
 
 
 def testResponse():
-    return {'statusCode': 200, 'body': json.dumps(example_response.please())}
+
+    return {
+        'statusCode': 200,
+        'headers': {'Access-Control-Allow-Origin': "*", 'content-type': 'application/json'},
+        'body': json.dumps(example_response.please())
+    }
