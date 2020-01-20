@@ -20,7 +20,10 @@ table = dynamodb.Table('ApotifyApiKeys')
 
 def lambda_handler(event, context):
 
-    if event['test']:
+    logger.info("TestEventReceived")
+    return testResponse()
+
+    if 'test' in event['body']:
         logger.info("TestEventReceived")
         return testResponse()
 
@@ -44,7 +47,7 @@ def lambda_handler(event, context):
 
     top_5_artists = response.json()
 
-    return {'statusCode': 200, 'headers': {'Access-Control-Allow-Origin': "*", 'content-type': 'application/json'}, 'body': json.dumps(top_5_artists)}
+    return {'statusCode': 200, 'body': json.dumps(top_5_artists)}
 
 
 # Request a new AccessToken from Spotify using the refresh token for our spotifyApp.
@@ -67,4 +70,4 @@ def refreshTheToken(refreshToken):
 
 
 def testResponse():
-    return {'statusCode': 200, 'headers': {'Access-Control-Allow-Origin': "*", 'content-type': 'application/json'}, 'body': json.dumps(example_response.please())}
+    return {'statusCode': 200, 'body': json.dumps(example_response.please())}
