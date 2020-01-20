@@ -1,8 +1,9 @@
 # How to use the UI package
 
 ```
-npm start
 npm test
+npm start
+ngrok http 3000 -host-header="localhost:3000"
 npm run prod
 # take bundle and drop it into your static site
 ```
