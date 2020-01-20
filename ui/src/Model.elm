@@ -1,4 +1,4 @@
-module Model exposing (Model, Msg(..), init)
+module Model exposing (Model, Msg(..))
 
 import Data.Artists exposing (Artist)
 import Http exposing (Error(..))
@@ -12,8 +12,3 @@ type alias Model =
 type Msg
     = GetSpotifyData
     | SpotifyResponse (WebData (List Artist))
-
-
-init : ( Model, Cmd Msg )
-init =
-    ( RemoteData.NotAsked, Cmd.none )

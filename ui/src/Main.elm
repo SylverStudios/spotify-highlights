@@ -6,7 +6,7 @@ import Html exposing (..)
 import Html.Attributes exposing (..)
 import Html.Events exposing (onClick)
 import Http exposing (Error(..))
-import Model exposing (Model, Msg(..), init)
+import Model exposing (Model, Msg(..))
 import RemoteData exposing (WebData)
 
 
@@ -17,15 +17,10 @@ import RemoteData exposing (WebData)
 
 
 update : Msg -> Model -> ( Model, Cmd Msg )
-update message model =
+update message _ =
     case message of
         GetSpotifyData ->
-            ( model
-            , Http.get
-                { url = "https://rodwrl4gq1.execute-api.us-east-1.amazonaws.com/Prod/hello/"
-                , expect = Http.expectJson (RemoteData.fromResult >> SpotifyResponse) Data.Artists.decoder
-                }
-            )
+            ( RemoteData.Loading, getArtists )
 
         SpotifyResponse data ->
             ( data, Cmd.none )
@@ -41,15 +36,7 @@ view : Model -> Html Msg
 view model =
     div [ class "container" ]
         [ header [] [ h1 [] [ text "My Favorite Recent Artists" ] ]
-        , div [ class "pure-g" ]
-            [ div [ class "pure-u-1-3" ]
-                [ button
-                    [ class "pure-button pure-button-primary", onClick GetSpotifyData ]
-                    [ text "Request it." ]
-                ]
-            , div [ class "pure-u-1-3" ] []
-            , div [ class "pure-u-1-3" ] [ displayArtists model ]
-            ]
+        , displayArtists model
         ]
 
 
@@ -60,7 +47,7 @@ displayArtists data =
             div [] [ text "Load the Data by clicking above!" ]
 
         RemoteData.Success artists ->
-            div [] (List.map displayArtist artists)
+            div [ class "artists" ] (List.map displayArtist artists)
 
         RemoteData.Loading ->
             div [] [ text "Loading…" ]
@@ -72,11 +59,8 @@ displayArtists data =
 displayArtist : Artist -> Html msg
 displayArtist { genres, name } =
     div []
-        [ h1 [] [ text name ]
-        , span [] [ text "Genres: " ]
-        , span []
-            [ text <| String.join ", " genres
-            ]
+        [ div [ class "artist" ] [ text name ]
+        , div [ class "genre" ] [ text (genres |> List.head |> Maybe.withDefault "") ]
         ]
 
 
@@ -97,4 +81,17 @@ main =
                 , body = [ view m ]
                 }
         , subscriptions = \_ -> Sub.none
+        }
+
+
+init : ( Model, Cmd Msg )
+init =
+    update GetSpotifyData RemoteData.NotAsked
+
+
+getArtists : Cmd Msg
+getArtists =
+    Http.get
+        { url = "https://rodwrl4gq1.execute-api.us-east-1.amazonaws.com/Prod/hello/"
+        , expect = Http.expectJson (RemoteData.fromResult >> SpotifyResponse) Data.Artists.decoder
         }
