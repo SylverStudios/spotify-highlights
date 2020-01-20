@@ -2,7 +2,6 @@
 *.secrets.*
 lambda/package
 *.zip
-**/node_modules
 
 
 ### OSX ###
