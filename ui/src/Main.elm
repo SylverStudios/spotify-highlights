@@ -72,14 +72,10 @@ displayArtist { genres, name } =
 
 main : Program () Model Msg
 main =
-    Browser.document
+    Browser.element
         { init = \_ -> init
         , update = update
-        , view =
-            \m ->
-                { title = "Elm 0.19 starter"
-                , body = [ view m ]
-                }
+        , view = view
         , subscriptions = \_ -> Sub.none
         }
 
