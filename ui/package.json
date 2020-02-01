@@ -1,8 +1,8 @@
 {
-    "author": "Simon Hampton",
-    "name": "elm-webpack-starter",
-    "version": "3.9.2",
-    "description": "Elm 0.19 starter with Webpack 4 hot-reloading",
+    "author": "Aaron Votre",
+    "name": "spotify-highlights-client",
+    "version": "1.0.0",
+    "description": "Embeddable Elm 0.19 for spotify-highlights API",
     "main": "index.js",
     "scripts": {
         "test": "elm-test",
@@ -14,7 +14,7 @@
     },
     "repository": {
         "type": "git",
-        "url": "git+https://github.com/simonh1000/elm-webpack-starter.git"
+        "url": "git+https://github.com/SylverStudios/spotify-highlights.git"
     },
     "license": "MIT",
     "devDependencies": {
@@ -23,7 +23,6 @@
         "babel-loader": "^8.0.6",
         "clean-webpack-plugin": "^3.0.0",
         "closure-webpack-plugin": "^2.0.1",
-        "copy-webpack-plugin": "^5.0.5",
         "css-loader": "^3.2.0",
         "elm": "^0.19.1-2",
         "elm-analyse": "^0.16.5",
