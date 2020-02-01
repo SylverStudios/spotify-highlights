@@ -2,18 +2,11 @@ module Main exposing (main, update, view)
 
 import Browser
 import Data.Artists exposing (Artist)
-import Html exposing (..)
-import Html.Attributes exposing (..)
-import Html.Events exposing (onClick)
+import Html exposing (Html, div, header, text, h1)
+import Html.Attributes exposing (class)
 import Http exposing (Error(..))
 import Model exposing (Model, Msg(..))
 import RemoteData exposing (WebData)
-
-
-
--- ---------------------------
--- UPDATE
--- ---------------------------
 
 
 update : Msg -> Model -> ( Model, Cmd Msg )
@@ -24,12 +17,6 @@ update message _ =
 
         SpotifyResponse data ->
             ( data, Cmd.none )
-
-
-
--- ---------------------------
--- VIEW
--- ---------------------------
 
 
 view : Model -> Html Msg
@@ -62,12 +49,6 @@ displayArtist { genres, name } =
         [ div [ class "artist" ] [ text name ]
         , div [ class "genre" ] [ text (genres |> List.head |> Maybe.withDefault "") ]
         ]
-
-
-
--- ---------------------------
--- MAIN
--- ---------------------------
 
 
 main : Program () Model Msg
