@@ -3,7 +3,6 @@ const webpack = require("webpack");
 const merge = require("webpack-merge");
 
 const ClosurePlugin = require('closure-webpack-plugin');
-const CopyWebpackPlugin = require("copy-webpack-plugin");
 const HTMLWebpackPlugin = require("html-webpack-plugin");
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 // to extract the css as a separate file
@@ -116,7 +115,7 @@ if (MODE === "development") {
             // feel free to delete this section if you don't need anything like this
             before(app) {
                 // on port 3000
-                app.get("/test", function(req, res) {
+                app.get("/test", function (req, res) {
                     res.json({ result: "OK" });
                 });
             }
@@ -127,17 +126,17 @@ if (MODE === "production") {
     module.exports = merge(common, {
         optimization: {
             minimizer: [
-              new ClosurePlugin({mode: 'STANDARD'}, {
-                // compiler flags here
-                //
-                // for debugging help, try these:
-                //
-                // formatting: 'PRETTY_PRINT',
-                // debug: true
-                // renaming: false
-              })
+                new ClosurePlugin({ mode: 'STANDARD' }, {
+                    // compiler flags here
+                    //
+                    // for debugging help, try these:
+                    //
+                    // formatting: 'PRETTY_PRINT',
+                    // debug: true
+                    // renaming: false
+                })
             ]
-          }, plugins: [
+        }, plugins: [
             // Delete everything from output-path (/dist) and report to user
             new CleanWebpackPlugin({
                 root: __dirname,
@@ -145,12 +144,6 @@ if (MODE === "production") {
                 verbose: true,
                 dry: false
             }),
-            // Copy static assets
-            new CopyWebpackPlugin([
-                {
-                    from: "src/assets"
-                }
-            ]),
             new MiniCssExtractPlugin({
                 // Options similar to the same options in webpackOptions.output
                 // both options are optional
