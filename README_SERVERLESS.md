@@ -10,21 +10,24 @@ Trying it out. This is a wrapper around the AWS SAM configuration. So far it loo
   * Seed data could be nice too
 * IAM roles needed for these
 
-```bash
-npm install serverless -g
+```sh
+> npm install serverless -g
+
+# Deploy uses local env vars
+> export CLIENT_TOKEN=<client_token>
+> export REFRESH_TOKEN=<spotify_refresh_token>
+
+> serverless deploy --aws-profile personal
+> sls remove --aws-profile personal
 ```
 
 Variables can resolve at runtime, those are interpolated with
-```
-# Reference a field within this .yaml
-${self:service}
-
-# Reference the --stage X option with default 'dev'
-${opt:stage, 'dev'}
-
-# Reference a local environment variable
-${env:FUNC_PREFIX}
-
+```yaml
+# Different ways to resolve variables
+environment:
+    VARIABLE_WITHIN_YAML: ${self:service}
+    VARIABLE_THROUGH_ENV: ${env:FUNC_PREFIX}
+    VARIABLE_THROUGH_OPTION_WITH_DEFAULT: ${opt:stage, 'dev'}
 ```
 
 
@@ -36,3 +39,9 @@ That will use a profile `[personal]` in your aws creds file.
 
 That's how I setup my aws creds personally, but you can also pass an option if you want to use a different one at runtime.
 `serverless deploy --aws-profile otherProfileHere`
+
+
+## Temp
+BQDh6U6mZbtlOMz0aLtLmBuv8tOdDQgQTrcJcWSogTU8-f7QkreqRujDnHmY9M7gH0vldMonVLUn0dYlb1KI2qpwQBnvhtrwRHh_uZ7r4t-fBrqpdSOsg52PQCq8HhRkbMob4jq-VeHLKbKotws9
+
+spotify refresh token

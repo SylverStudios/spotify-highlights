@@ -1,6 +1,9 @@
 service: serverless-spotify-api
 
-frameworkVersion: ">=1.1.0 <2.0.0"
+frameworkVersion: ">=v1.34 <2.0.0"
+
+plugins:
+  - serverless-python-requirements
 
 provider:
   name: aws
@@ -22,6 +25,10 @@ provider:
 functions:
   create:
     handler: spotify_artists/app.lambda_handler
+    environment:
+      DYNAMODB_TABLE: ${self:provider.environment.DYNAMODB_TABLE}
+      REFRESH_TOKEN: ${env:REFRESH_TOKEN}
+      CLIENT_TOKEN: ${env:CLIENT_TOKEN}
     events:
       - http:
           path: artists
@@ -30,7 +37,7 @@ functions:
 
 resources:
   Resources:
-    TodosDynamoDbTable:
+    SpotifyDynamoDbTable:
       Type: 'AWS::DynamoDB::Table'
       DeletionPolicy: Retain
       Properties:
