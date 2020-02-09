@@ -3,6 +3,8 @@
 lambda/package
 *.zip
 
+/node_modules
+.serverless/
 
 ### OSX ###
 *.DS_Store
