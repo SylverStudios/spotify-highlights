@@ -7,7 +7,7 @@ Trying it out. This is a wrapper around the AWS SAM configuration. So far it loo
 * Lambda
   * Env vars would be nice too
 * DynamoDB Table
-  * Seed data could be nice too
+  * Seed data could be nice too 
 * IAM roles needed for these
 
 ```sh
@@ -39,9 +39,3 @@ That will use a profile `[personal]` in your aws creds file.
 
 That's how I setup my aws creds personally, but you can also pass an option if you want to use a different one at runtime.
 `serverless deploy --aws-profile otherProfileHere`
-
-
-## Temp
-BQDh6U6mZbtlOMz0aLtLmBuv8tOdDQgQTrcJcWSogTU8-f7QkreqRujDnHmY9M7gH0vldMonVLUn0dYlb1KI2qpwQBnvhtrwRHh_uZ7r4t-fBrqpdSOsg52PQCq8HhRkbMob4jq-VeHLKbKotws9
-
-spotify refresh token
