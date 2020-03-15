@@ -4,18 +4,19 @@ import boto3
 import json
 import logging
 import os
-import example_response
+from spotify_artists import example_response
 
-refreshToken = os.environ['REFRESH_TOKEN']
-clientIdClientSecret = os.environ['CLIENT_TOKEN']
 
 logger = logging.getLogger()
 logger.setLevel(logging.INFO)
 
-# Connect the DynamoDB database
+# Connect the DynamoDB database. Requires `DYNAMODB_TABLE` ENV var
 
 dynamodb = boto3.resource('dynamodb')
-table = dynamodb.Table('ApotifyApiKeys')
+table = dynamodb.Table(os.environ['DYNAMODB_TABLE'])
+
+refreshToken = os.environ['REFRESH_TOKEN']
+clientIdClientSecret = os.environ['CLIENT_TOKEN']
 
 
 def lambda_handler(event, context):
@@ -29,14 +30,14 @@ def lambda_handler(event, context):
 
     # See if "expiresAt" indeed indicates we need a new token.
     # Spotify access tokens last for 3600 seconds.
-    dbResponse = table.get_item(Key={'spotify': 'prod'})
+    dbResponse = table.get_item(Key={'id': 'aaron'})
     expiresAt = dbResponse['Item']['expiresAt']  # In seconds
 
     # If expired....
     if expiresAt <= time.time():
         refreshTheToken(refreshToken)
 
-    dbResponse = table.get_item(Key={'spotify': 'prod'})
+    dbResponse = table.get_item(Key={'id': 'aaron'})
     accessToken = dbResponse['Item']['accessToken']
 
     headers = {'Authorization': 'Bearer ' + accessToken,
