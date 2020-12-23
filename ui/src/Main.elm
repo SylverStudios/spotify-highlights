@@ -2,11 +2,19 @@ module Main exposing (main, update, view)
 
 import Browser
 import Data.Artists exposing (Artist)
-import Html exposing (Html, div, header, text, h1)
+import Html exposing (Html, div, h1, header, text)
 import Html.Attributes exposing (class)
 import Http exposing (Error(..))
-import Model exposing (Model, Msg(..))
 import RemoteData exposing (WebData)
+
+
+type alias Model =
+    WebData (List Artist)
+
+
+type Msg
+    = GetSpotifyData
+    | SpotifyResponse (WebData (List Artist))
 
 
 update : Msg -> Model -> ( Model, Cmd Msg )
@@ -69,6 +77,7 @@ init =
 getArtists : Cmd Msg
 getArtists =
     Http.get
-        { url = "https://rodwrl4gq1.execute-api.us-east-1.amazonaws.com/Prod/hello/"
+        -- { url = "https://rodwrl4gq1.execute-api.us-east-1.amazonaws.com/Prod/hello/"
+        { url = "https://deploy-preview-2--wizardly-wiles-29c9bb.netlify.app/.netlify/functions/spotify"
         , expect = Http.expectJson (RemoteData.fromResult >> SpotifyResponse) Data.Artists.decoder
         }
