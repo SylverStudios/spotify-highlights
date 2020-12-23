@@ -12,7 +12,7 @@ type alias Artist =
 
 decoder : Decode.Decoder (List Artist)
 decoder =
-    Decode.field "items" (Decode.list artistDecoder)
+    Decode.list artistDecoder
 
 
 artistDecoder : Decode.Decoder Artist
