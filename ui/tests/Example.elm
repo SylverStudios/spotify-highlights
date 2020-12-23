@@ -1,8 +1,7 @@
 module Example exposing (unitTest)
 
 import Expect
-import Main exposing (update)
-import Model exposing (Msg(..))
+import Main exposing (Msg(..), update)
 import RemoteData
 import Test exposing (Test, describe, test)
 import Test.Html.Selector exposing (tag, text)

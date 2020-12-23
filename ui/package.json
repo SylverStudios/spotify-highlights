@@ -1,7 +1,7 @@
 {
     "author": "Aaron Votre",
     "name": "spotify-highlights-client",
-    "version": "1.0.0",
+    "version": "2.0.0",
     "description": "Embeddable Elm 0.19 for spotify-highlights API",
     "main": "index.js",
     "scripts": {

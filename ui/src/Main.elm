@@ -1,4 +1,4 @@
-module Main exposing (main, update, view)
+module Main exposing (main, update, view, Msg(..))
 
 import Browser
 import Data.Artists exposing (Artist)
