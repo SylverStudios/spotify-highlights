@@ -1,4 +1,4 @@
-module Main exposing (main, update, view, Msg(..))
+module Main exposing (Msg(..), main, update, view)
 
 import Browser
 import Data.Artists exposing (Artist)
@@ -77,7 +77,6 @@ init =
 getArtists : Cmd Msg
 getArtists =
     Http.get
-        -- { url = "https://rodwrl4gq1.execute-api.us-east-1.amazonaws.com/Prod/hello/"
-        { url = "https://deploy-preview-2--wizardly-wiles-29c9bb.netlify.app/.netlify/functions/spotify"
+        { url = "/.netlify/functions/spotify"
         , expect = Http.expectJson (RemoteData.fromResult >> SpotifyResponse) Data.Artists.decoder
         }
